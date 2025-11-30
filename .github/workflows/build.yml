@@ -1,0 +1,26 @@
+name: Build undock.dll for MT5
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:    # امکان اجرا دستی از تب Actions
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup MSVC build tools
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Build DLL
+      run: cl /LD /MD /EHsc undock.cpp user32.lib /Feundock.dll
+
+    - name: Upload DLL artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: undock-dll
+        path: undock.dll
