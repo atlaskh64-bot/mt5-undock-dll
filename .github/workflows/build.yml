@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup MSVC build tools
       uses: ilammy/msvc-dev-cmd@v1
@@ -20,7 +20,7 @@ jobs:
       run: cl /LD /MD /EHsc undock.cpp user32.lib /Feundock.dll
 
     - name: Upload DLL artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: undock-dll
         path: undock.dll
